@@ -32,8 +32,8 @@ router.get('/', async (c) => {
   if (!workspaceId) return c.json({ error: 'workspace_id is required' }, 400)
 
   const dimension = (c.req.query('dimension') ?? 'brand').toLowerCase()
-  const column = DIMENSION_COLUMNS[dimension]
-  if (!column) {
+  const column = dimension === 'overall' ? null : DIMENSION_COLUMNS[dimension]
+  if (dimension !== 'overall' && !column) {
     return c.json({ error: `Unknown dimension: ${dimension}` }, 400)
   }
 
@@ -57,8 +57,12 @@ router.get('/', async (c) => {
 
   const groups = new Map<string, EffectiveRateAccumulator>()
   for (const r of rows) {
-    const raw = (r as Record<string, unknown>)[column as string]
-    const key = raw == null || raw === '' ? '(unknown)' : String(raw)
+    const key = column
+      ? (() => {
+          const raw = (r as Record<string, unknown>)[column as string]
+          return raw == null || raw === '' ? '(unknown)' : String(raw)
+        })()
+      : 'overall'
     let acc = groups.get(key)
     if (!acc) {
       acc = {
