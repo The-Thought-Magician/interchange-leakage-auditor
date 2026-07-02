@@ -53,9 +53,9 @@ function BandBar({ low, target, high, max }: { low: number; high: number; target
   const width = Math.max(1, x1 - x0)
   return (
     <svg viewBox="0 0 100 12" preserveAspectRatio="none" className="h-3 w-full">
-      <rect x={0} y={5} width={100} height={2} rx={1} className="fill-slate-800" />
-      <rect x={x0} y={3} width={width} height={6} rx={2} className="fill-emerald-500/40" />
-      <line x1={xt} x2={xt} y1={1} y2={11} className="stroke-emerald-400" strokeWidth={1.5} />
+      <rect x={0} y={5} width={100} height={2} rx={1} className="fill-neutral-800" />
+      <rect x={x0} y={3} width={width} height={6} rx={2} className="fill-red-500/40" />
+      <line x1={xt} x2={xt} y1={1} y2={11} className="stroke-red-400" strokeWidth={1.5} />
     </svg>
   )
 }
@@ -244,7 +244,7 @@ export default function BenchmarksPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Benchmark Bands</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Target effective-rate bands (bps) per dimension, used to flag over-cost areas.
           </p>
         </div>
@@ -271,12 +271,12 @@ export default function BenchmarksPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search key, dimension, note…"
-              className="w-64 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="w-64 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
             <select
               value={dimFilter}
               onChange={(e) => setDimFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">All dimensions</option>
               {DIMENSIONS.map((d) => (
@@ -297,7 +297,7 @@ export default function BenchmarksPage() {
               </Button>
             )}
           </div>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-neutral-500">
             {filtered.length} of {benchmarks.length}
           </span>
         </CardHeader>
@@ -363,14 +363,14 @@ export default function BenchmarksPage() {
                     <TD>
                       <Badge tone={dimTone(b.dimension)}>{prettyDim(b.dimension)}</Badge>
                     </TD>
-                    <TD className="font-mono text-xs text-slate-300">{b.dimension_key || '—'}</TD>
-                    <TD className="text-right tabular-nums text-slate-400">
+                    <TD className="font-mono text-xs text-neutral-300">{b.dimension_key || '—'}</TD>
+                    <TD className="text-right tabular-nums text-neutral-400">
                       {b.band_low_bps != null ? b.band_low_bps.toFixed(0) : '—'}
                     </TD>
-                    <TD className="text-right tabular-nums font-semibold text-emerald-400">
+                    <TD className="text-right tabular-nums font-semibold text-red-400">
                       {b.band_target_bps != null ? b.band_target_bps.toFixed(0) : '—'}
                     </TD>
-                    <TD className="text-right tabular-nums text-slate-400">
+                    <TD className="text-right tabular-nums text-neutral-400">
                       {b.band_high_bps != null ? b.band_high_bps.toFixed(0) : '—'}
                     </TD>
                     <TD>
@@ -382,10 +382,10 @@ export default function BenchmarksPage() {
                           max={maxBps}
                         />
                       ) : (
-                        <span className="text-xs text-slate-600">—</span>
+                        <span className="text-xs text-neutral-600">—</span>
                       )}
                     </TD>
-                    <TD className="max-w-xs truncate text-slate-500">{b.source_note || '—'}</TD>
+                    <TD className="max-w-xs truncate text-neutral-500">{b.source_note || '—'}</TD>
                     <TD className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="secondary" onClick={() => openEdit(b)}>
@@ -507,7 +507,7 @@ export default function BenchmarksPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-neutral-300">
           Delete the{' '}
           <span className="font-semibold text-white">
             {deleting ? prettyDim(deleting.dimension) : ''} {deleting?.dimension_key || ''}
@@ -520,12 +520,12 @@ export default function BenchmarksPage() {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">{label}</span>
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">{label}</span>
       {children}
     </label>
   )

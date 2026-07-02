@@ -229,7 +229,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/dashboard/transactions" className="text-xs text-slate-500 hover:text-emerald-400">
+          <Link href="/dashboard/transactions" className="text-xs text-neutral-500 hover:text-red-400">
             ← Transactions
           </Link>
           <h1 className="mt-1 flex items-center gap-3 text-2xl font-bold text-white">
@@ -244,7 +244,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
               <Badge tone="neutral">Not qualified</Badge>
             )}
           </h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             {t.card_brand || 'Unknown brand'} · {t.card_product || 'product n/a'} · MCC {t.mcc || '—'}
           </p>
         </div>
@@ -253,7 +253,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
         </Button>
       </div>
 
-      {msg && <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">{msg}</div>}
+      {msg && <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm text-red-300">{msg}</div>}
 
       {/* Qualification stats */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -272,7 +272,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
         {/* Transaction details */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <span className="text-sm font-semibold text-slate-200">Transaction</span>
+            <span className="text-sm font-semibold text-neutral-200">Transaction</span>
           </CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Field label="External ref" value={t.external_ref || '—'} mono />
@@ -284,8 +284,8 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
               label="Billed rate"
               value={t.billed_percent_rate != null ? `${t.billed_percent_rate}%` : '—'}
             />
-            <div className="border-t border-slate-800 pt-3">
-              <div className="mb-2 text-xs uppercase tracking-wide text-slate-500">Eligibility flags</div>
+            <div className="border-t border-neutral-800 pt-3">
+              <div className="mb-2 text-xs uppercase tracking-wide text-neutral-500">Eligibility flags</div>
               <div className="flex flex-wrap gap-1.5">
                 <Badge tone={t.has_avs ? 'success' : 'neutral'}>AVS {t.has_avs ? '✓' : '✕'}</Badge>
                 <Badge tone={t.has_cvv ? 'success' : 'neutral'}>CVV {t.has_cvv ? '✓' : '✕'}</Badge>
@@ -293,18 +293,18 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
                 <Badge tone={t.has_level3 ? 'success' : 'neutral'}>L3 {t.has_level3 ? '✓' : '✕'}</Badge>
               </div>
             </div>
-            <div className="border-t border-slate-800 pt-3">
-              <div className="mb-2 text-xs uppercase tracking-wide text-slate-500">Tags</div>
+            <div className="border-t border-neutral-800 pt-3">
+              <div className="mb-2 text-xs uppercase tracking-wide text-neutral-500">Tags</div>
               <div className="mb-2 flex flex-wrap gap-1.5">
-                {tags.length === 0 && <span className="text-xs text-slate-600">No tags</span>}
+                {tags.length === 0 && <span className="text-xs text-neutral-600">No tags</span>}
                 {tags.map((tag) => (
-                  <span key={tag} className="inline-flex items-center gap-1 rounded-md border border-sky-500/30 bg-sky-500/10 px-2 py-0.5 text-xs text-sky-400">
+                  <span key={tag} className="inline-flex items-center gap-1 rounded-md border border-neutral-500/30 bg-neutral-500/10 px-2 py-0.5 text-xs text-neutral-400">
                     {tag}
                     <button
                       onClick={() => removeTag(tag)}
                       disabled={savingTags}
                       aria-label={`Remove ${tag}`}
-                      className="text-sky-500/70 hover:text-rose-400"
+                      className="text-neutral-500/70 hover:text-rose-400"
                     >
                       ✕
                     </button>
@@ -317,7 +317,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && addTag()}
                   placeholder="add tag"
-                  className="flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+                  className="flex-1 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
                 />
                 <Button variant="secondary" onClick={addTag} disabled={savingTags || !tagInput.trim()}>
                   Add
@@ -331,8 +331,8 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
         <div className="space-y-6 lg:col-span-2">
           <Card>
             <CardHeader className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-slate-200">Qualification result</span>
-              {r?.computed_at && <span className="text-xs text-slate-500">computed {fmtDate(r.computed_at)}</span>}
+              <span className="text-sm font-semibold text-neutral-200">Qualification result</span>
+              {r?.computed_at && <span className="text-xs text-neutral-500">computed {fmtDate(r.computed_at)}</span>}
             </CardHeader>
             <CardBody>
               {!r ? (
@@ -347,15 +347,15 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
                 />
               ) : (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="rounded-lg border border-slate-800 bg-slate-950/50 p-4">
-                    <div className="text-xs uppercase tracking-wide text-slate-500">Billed</div>
+                  <div className="rounded-lg border border-neutral-800 bg-neutral-950/50 p-4">
+                    <div className="text-xs uppercase tracking-wide text-neutral-500">Billed</div>
                     <div className="mt-1 font-mono text-sm text-amber-400">{t.billed_category_code || '—'}</div>
                     <div className="mt-1 text-lg font-bold tabular-nums text-amber-400">{fmtMoney(r.billed_fee_cents)}</div>
                   </div>
-                  <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
-                    <div className="text-xs uppercase tracking-wide text-slate-500">Optimal</div>
-                    <div className="mt-1 font-mono text-sm text-emerald-400">{r.optimal_category_code || '—'}</div>
-                    <div className="mt-1 text-lg font-bold tabular-nums text-emerald-400">{fmtMoney(r.optimal_fee_cents)}</div>
+                  <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-4">
+                    <div className="text-xs uppercase tracking-wide text-neutral-500">Optimal</div>
+                    <div className="mt-1 font-mono text-sm text-red-400">{r.optimal_category_code || '—'}</div>
+                    <div className="mt-1 text-lg font-bold tabular-nums text-red-400">{fmtMoney(r.optimal_fee_cents)}</div>
                   </div>
                   <div className="sm:col-span-2">
                     <DeltaBar billed={r.billed_fee_cents} optimal={r.optimal_fee_cents} />
@@ -368,11 +368,11 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
           {/* Downgrade causes */}
           <Card>
             <CardHeader>
-              <span className="text-sm font-semibold text-slate-200">Downgrade causes</span>
+              <span className="text-sm font-semibold text-neutral-200">Downgrade causes</span>
             </CardHeader>
             <CardBody>
               {causes.length === 0 ? (
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-neutral-500">
                   {r && !isDowngrade
                     ? 'This transaction qualified at the optimal rate. No recoverable leakage.'
                     : 'No downgrade causes recorded.'}
@@ -380,17 +380,17 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
               ) : (
                 <div className="space-y-3">
                   {causes.map((c) => (
-                    <div key={c.id} className="rounded-lg border border-slate-800 bg-slate-950/50 p-4">
+                    <div key={c.id} className="rounded-lg border border-neutral-800 bg-neutral-950/50 p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
                           <Badge tone={severityTone(c.severity)}>{c.severity || 'cause'}</Badge>
-                          <span className="font-medium text-slate-200">{CAUSE_LABELS[c.cause_code] || c.cause_code}</span>
+                          <span className="font-medium text-neutral-200">{CAUSE_LABELS[c.cause_code] || c.cause_code}</span>
                         </div>
                         <span className="font-bold tabular-nums text-rose-400">{fmtMoney(c.recoverable_cents)} recoverable</span>
                       </div>
-                      {c.required_fix && <p className="mt-2 text-sm text-slate-400">Fix: {c.required_fix}</p>}
+                      {c.required_fix && <p className="mt-2 text-sm text-neutral-400">Fix: {c.required_fix}</p>}
                       {c.detail && (
-                        <pre className="mt-2 overflow-x-auto rounded-md border border-slate-800 bg-slate-950 p-3 text-xs text-slate-400">
+                        <pre className="mt-2 overflow-x-auto rounded-md border border-neutral-800 bg-neutral-950 p-3 text-xs text-neutral-400">
                           {JSON.stringify(c.detail, null, 2)}
                         </pre>
                       )}
@@ -404,11 +404,11 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
           {/* Rule trace */}
           <Card>
             <CardHeader>
-              <span className="text-sm font-semibold text-slate-200">Rule trace</span>
+              <span className="text-sm font-semibold text-neutral-200">Rule trace</span>
             </CardHeader>
             <CardBody>
               {trace.length === 0 ? (
-                <p className="text-sm text-slate-500">No rule trace available. Run the qualification engine to generate one.</p>
+                <p className="text-sm text-neutral-500">No rule trace available. Run the qualification engine to generate one.</p>
               ) : (
                 <Table>
                   <THead>
@@ -435,7 +435,7 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
                               ))}
                             </div>
                           ) : (
-                            <span className="text-xs text-slate-600">—</span>
+                            <span className="text-xs text-neutral-600">—</span>
                           )}
                         </TD>
                       </TR>
@@ -454,8 +454,8 @@ export default function TransactionDetailPage({ params }: { params: Promise<{ id
 function Field({ label, value, mono }: { label: string; value: ReactNode; mono?: boolean }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-xs text-slate-500">{label}</span>
-      <span className={`text-right text-slate-200 ${mono ? 'font-mono text-xs' : ''}`}>{value}</span>
+      <span className="text-xs text-neutral-500">{label}</span>
+      <span className={`text-right text-neutral-200 ${mono ? 'font-mono text-xs' : ''}`}>{value}</span>
     </div>
   )
 }
@@ -468,21 +468,21 @@ function DeltaBar({ billed, optimal }: { billed: number | null; optimal: number 
   const optimalPct = (o / max) * 100
   return (
     <div className="space-y-2">
-      <div className="text-xs uppercase tracking-wide text-slate-500">Billed vs optimal</div>
+      <div className="text-xs uppercase tracking-wide text-neutral-500">Billed vs optimal</div>
       <div className="space-y-1.5">
         <div className="flex items-center gap-2">
-          <span className="w-16 text-xs text-slate-500">Billed</span>
-          <div className="h-3 flex-1 overflow-hidden rounded bg-slate-800">
+          <span className="w-16 text-xs text-neutral-500">Billed</span>
+          <div className="h-3 flex-1 overflow-hidden rounded bg-neutral-800">
             <div className="h-full rounded bg-amber-500" style={{ width: `${billedPct}%` }} />
           </div>
           <span className="w-20 text-right text-xs tabular-nums text-amber-400">{fmtMoney(b)}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-16 text-xs text-slate-500">Optimal</span>
-          <div className="h-3 flex-1 overflow-hidden rounded bg-slate-800">
-            <div className="h-full rounded bg-emerald-500" style={{ width: `${optimalPct}%` }} />
+          <span className="w-16 text-xs text-neutral-500">Optimal</span>
+          <div className="h-3 flex-1 overflow-hidden rounded bg-neutral-800">
+            <div className="h-full rounded bg-red-500" style={{ width: `${optimalPct}%` }} />
           </div>
-          <span className="w-20 text-right text-xs tabular-nums text-emerald-400">{fmtMoney(o)}</span>
+          <span className="w-20 text-right text-xs tabular-nums text-red-400">{fmtMoney(o)}</span>
         </div>
       </div>
     </div>

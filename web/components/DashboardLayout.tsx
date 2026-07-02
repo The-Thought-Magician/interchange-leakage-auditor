@@ -91,9 +91,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (!ready) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950">
-        <div className="flex items-center gap-3 text-slate-400">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-slate-700 border-t-emerald-400" />
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950">
+        <div className="flex items-center gap-3 text-neutral-400">
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-neutral-700 border-t-red-400" />
           Loading workspace...
         </div>
       </div>
@@ -103,13 +103,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const sidebar = (
     <nav className="flex h-full flex-col gap-6 overflow-y-auto px-4 py-6">
       <Link href="/dashboard" className="flex items-center gap-2 px-2">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500 text-sm font-black text-slate-950">IL</span>
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-500 text-sm font-black text-neutral-950">IL</span>
         <span className="text-sm font-bold leading-tight text-white">InterchangeLeakageAuditor</span>
       </Link>
       <div className="flex flex-col gap-5">
         {NAV.map((section) => (
           <div key={section.title}>
-            <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-600">{section.title}</div>
+            <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-neutral-600">{section.title}</div>
             <ul className="space-y-0.5">
               {section.items.map((item) => {
                 const active = isActive(pathname, item.href)
@@ -119,8 +119,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       href={item.href}
                       className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                         active
-                          ? 'bg-emerald-500/10 font-medium text-emerald-400'
-                          : 'text-slate-400 hover:bg-slate-800/60 hover:text-white'
+                          ? 'bg-red-500/10 font-medium text-red-400'
+                          : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-white'
                       }`}
                     >
                       {item.label}
@@ -136,35 +136,35 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   )
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-800 bg-slate-900/40 lg:block">
+    <div className="min-h-screen bg-neutral-950">
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-neutral-800 bg-neutral-900/40 lg:block">
         {sidebar}
       </aside>
 
       {drawerOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-slate-950/70" onClick={() => setDrawerOpen(false)} />
-          <aside className="absolute inset-y-0 left-0 w-64 border-r border-slate-800 bg-slate-900">{sidebar}</aside>
+          <div className="absolute inset-0 bg-neutral-950/70" onClick={() => setDrawerOpen(false)} />
+          <aside className="absolute inset-y-0 left-0 w-64 border-r border-neutral-800 bg-neutral-900">{sidebar}</aside>
         </div>
       )}
 
       <div className="lg:pl-64">
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-800 bg-slate-950/80 px-4 py-3 backdrop-blur lg:px-8">
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-neutral-800 bg-neutral-950/80 px-4 py-3 backdrop-blur lg:px-8">
           <div className="flex items-center gap-3">
             <button
-              className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden"
+              className="rounded-lg p-2 text-neutral-400 hover:bg-neutral-800 hover:text-white lg:hidden"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation"
             >
               ☰
             </button>
-            <span className="text-sm font-medium text-slate-300">Workspace</span>
+            <span className="text-sm font-medium text-neutral-300">Workspace</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="hidden text-sm text-slate-400 sm:inline">{userLabel}</span>
+            <span className="hidden text-sm text-neutral-400 sm:inline">{userLabel}</span>
             <button
               onClick={signOut}
-              className="rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white"
+              className="rounded-lg border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-white"
             >
               Sign out
             </button>

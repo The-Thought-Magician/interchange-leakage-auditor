@@ -76,9 +76,9 @@ function fmtDate(s?: string) {
 
 function YesNo({ value }: { value?: boolean }) {
   return value ? (
-    <span className="text-emerald-400">✓</span>
+    <span className="text-red-400">✓</span>
   ) : (
-    <span className="text-slate-600">—</span>
+    <span className="text-neutral-600">—</span>
   )
 }
 
@@ -204,7 +204,7 @@ export default function UploadDetailPage() {
   if (error && !batch) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/uploads" className="text-sm text-emerald-400 hover:text-emerald-300">
+        <Link href="/dashboard/uploads" className="text-sm text-red-400 hover:text-red-300">
           ← Back to uploads
         </Link>
         <EmptyState title="Could not load batch" description={error} />
@@ -215,7 +215,7 @@ export default function UploadDetailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/uploads" className="text-sm text-emerald-400 hover:text-emerald-300">
+        <Link href="/dashboard/uploads" className="text-sm text-red-400 hover:text-red-300">
           ← Back to uploads
         </Link>
       </div>
@@ -226,7 +226,7 @@ export default function UploadDetailPage() {
             <h1 className="text-2xl font-bold text-white">{batch?.filename || 'Batch'}</h1>
             <Badge tone={statusTone(batch?.status)}>{batch?.status || 'unknown'}</Badge>
           </div>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             {(batch?.source_format || '').toUpperCase()} · created {fmtDate(batch?.created_at)}
           </p>
           {batch?.error_message && (
@@ -249,7 +249,7 @@ export default function UploadDetailPage() {
         </div>
       )}
       {actionMsg && (
-        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {actionMsg}
         </div>
       )}
@@ -270,19 +270,19 @@ export default function UploadDetailPage() {
         <CardHeader>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-sm font-semibold text-white">
-              Transactions <span className="text-slate-500">({transactions.length})</span>
+              Transactions <span className="text-neutral-500">({transactions.length})</span>
             </h2>
             <div className="flex flex-wrap items-center gap-2">
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search ref / MCC / product"
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
               <select
                 value={brandFilter}
                 onChange={(e) => setBrandFilter(e.target.value)}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="all">All brands</option>
                 {brands.map((b) => (
@@ -333,10 +333,10 @@ export default function UploadDetailPage() {
               <TBody>
                 {filtered.map((t) => (
                   <TR key={t.id}>
-                    <TD className="font-mono text-xs text-slate-200">{t.external_ref || t.id.slice(0, 8)}</TD>
+                    <TD className="font-mono text-xs text-neutral-200">{t.external_ref || t.id.slice(0, 8)}</TD>
                     <TD>
-                      <div className="text-slate-200">{t.card_brand || '—'}</div>
-                      <div className="text-xs text-slate-500">{t.card_product || ''}</div>
+                      <div className="text-neutral-200">{t.card_brand || '—'}</div>
+                      <div className="text-xs text-neutral-500">{t.card_product || ''}</div>
                     </TD>
                     <TD>{t.mcc || '—'}</TD>
                     <TD>{t.entry_mode || '—'}</TD>

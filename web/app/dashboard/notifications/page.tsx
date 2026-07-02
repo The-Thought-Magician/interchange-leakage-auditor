@@ -200,7 +200,7 @@ export default function NotificationsPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold text-white">Notifications</h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neutral-500">
             {unreadCount > 0 ? `${unreadCount} unread of ${items.length}` : `${items.length} total`}
           </p>
         </div>
@@ -208,7 +208,7 @@ export default function NotificationsPage() {
           <select
             value={wsId}
             onChange={(e) => setWsId(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
           >
             {workspaces.map((w) => (
               <option key={w.id} value={w.id}>{w.name}</option>
@@ -231,13 +231,13 @@ export default function NotificationsPage() {
 
       <Card>
         <CardHeader className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-slate-950/40 p-1">
+          <div className="flex items-center gap-1 rounded-lg border border-neutral-800 bg-neutral-950/40 p-1">
             {(['all', 'unread', 'read'] as Filter[]).map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`rounded-md px-3 py-1.5 text-sm capitalize transition-colors ${
-                  filter === f ? 'bg-emerald-500/15 font-medium text-emerald-400' : 'text-slate-400 hover:text-white'
+                  filter === f ? 'bg-red-500/15 font-medium text-red-400' : 'text-neutral-400 hover:text-white'
                 }`}
               >
                 {f}
@@ -252,7 +252,7 @@ export default function NotificationsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search notifications…"
-            className="w-full max-w-xs rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+            className="w-full max-w-xs rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
           />
         </CardHeader>
         <CardBody className="p-0">
@@ -271,26 +271,26 @@ export default function NotificationsPage() {
               />
             </div>
           ) : (
-            <ul className="divide-y divide-slate-800">
+            <ul className="divide-y divide-neutral-800">
               {visible.map((n) => (
                 <li
                   key={n.id}
                   className={`flex items-start gap-3 px-5 py-4 transition-colors ${
-                    n.read ? 'opacity-70' : 'bg-emerald-500/[0.03]'
+                    n.read ? 'opacity-70' : 'bg-red-500/[0.03]'
                   }`}
                 >
                   <div className="mt-0.5 text-lg">{typeIcon(n.type)}</div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      {!n.read && <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400" />}
-                      <span className="font-medium text-slate-100">{n.title || n.type || 'Notification'}</span>
+                      {!n.read && <span className="h-2 w-2 shrink-0 rounded-full bg-red-400" />}
+                      <span className="font-medium text-neutral-100">{n.title || n.type || 'Notification'}</span>
                       {n.type && <Badge tone={typeTone(n.type)}>{n.type}</Badge>}
                       {n.entity_type && (
-                        <span className="text-xs text-slate-500">{n.entity_type}{n.entity_id ? ` · ${n.entity_id.slice(0, 8)}` : ''}</span>
+                        <span className="text-xs text-neutral-500">{n.entity_type}{n.entity_id ? ` · ${n.entity_id.slice(0, 8)}` : ''}</span>
                       )}
                     </div>
-                    {n.body && <p className="mt-1 text-sm text-slate-400">{n.body}</p>}
-                    <div className="mt-1 text-xs text-slate-600">{timeAgo(n.created_at)}</div>
+                    {n.body && <p className="mt-1 text-sm text-neutral-400">{n.body}</p>}
+                    <div className="mt-1 text-xs text-neutral-600">{timeAgo(n.created_at)}</div>
                   </div>
                   <div className="shrink-0">
                     {!n.read ? (
@@ -303,7 +303,7 @@ export default function NotificationsPage() {
                         {busyId === n.id ? '…' : 'Mark read'}
                       </Button>
                     ) : (
-                      <span className="text-xs text-slate-600">Read</span>
+                      <span className="text-xs text-neutral-600">Read</span>
                     )}
                   </div>
                 </li>

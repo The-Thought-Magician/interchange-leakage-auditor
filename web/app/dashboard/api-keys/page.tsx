@@ -162,7 +162,7 @@ export default function ApiKeysPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">API Keys</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Programmatic credentials for the interchange-audit API. Secrets are shown once at creation.
           </p>
         </div>
@@ -192,14 +192,14 @@ export default function ApiKeysPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by name or prefix..."
-                className="w-56 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-56 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
-              <label className="flex items-center gap-2 text-xs text-slate-400">
+              <label className="flex items-center gap-2 text-xs text-neutral-400">
                 <input
                   type="checkbox"
                   checked={showRevoked}
                   onChange={(e) => setShowRevoked(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-700 bg-slate-950 accent-emerald-500"
+                  className="h-4 w-4 rounded border-neutral-700 bg-neutral-950 accent-red-500"
                 />
                 Show revoked
               </label>
@@ -238,9 +238,9 @@ export default function ApiKeysPage() {
               <TBody>
                 {filtered.map((k) => (
                   <TR key={k.id}>
-                    <TD className="font-medium text-slate-100">{k.name}</TD>
+                    <TD className="font-medium text-neutral-100">{k.name}</TD>
                     <TD>
-                      <span className="font-mono text-xs text-slate-400">
+                      <span className="font-mono text-xs text-neutral-400">
                         {k.key_prefix ? `${k.key_prefix}…` : '—'}
                       </span>
                     </TD>
@@ -255,7 +255,7 @@ export default function ApiKeysPage() {
                     <TD>{fmtDate(k.created_at)}</TD>
                     <TD className="text-right">
                       {k.revoked ? (
-                        <span className="text-xs text-slate-600">—</span>
+                        <span className="text-xs text-neutral-600">—</span>
                       ) : (
                         <Button
                           variant="danger"
@@ -292,17 +292,17 @@ export default function ApiKeysPage() {
       >
         <form onSubmit={handleIssue} className="space-y-3">
           {issueErr && <div className="text-sm text-rose-400">{issueErr}</div>}
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             Key name
             <input
               autoFocus
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               placeholder="Production ingest"
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </label>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-neutral-500">
             The full secret is displayed only once after creation. Store it securely.
           </p>
         </form>
@@ -322,7 +322,7 @@ export default function ApiKeysPage() {
             Copy this secret now. You will not be able to see it again.
           </div>
           <div className="flex items-center gap-2">
-            <code className="flex-1 break-all rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-sm text-emerald-300">
+            <code className="flex-1 break-all rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-sm text-red-300">
               {issuedKey}
             </code>
             <Button variant="secondary" onClick={copyKey}>
@@ -348,7 +348,7 @@ export default function ApiKeysPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-neutral-300">
           Revoking <span className="font-semibold text-white">{revokeTarget?.name}</span> immediately
           disables it. Any integration using this key will stop working. This cannot be undone.
         </p>

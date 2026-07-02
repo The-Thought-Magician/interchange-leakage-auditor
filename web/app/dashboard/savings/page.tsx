@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/Spinner'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Table, THead, TBody, TR, TH, TD } from '@/components/ui/Table'
+import RightRail from '@/components/RightRail'
 
 type SavingsRow = {
   id: string
@@ -125,10 +126,11 @@ export default function SavingsPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
+    <div className="min-w-0 flex-1 space-y-8">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-white">Recoverable Savings</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neutral-400">
           Estimated annual savings if downgrades and qualification gaps were fixed, broken down by scope.
         </p>
       </header>
@@ -151,7 +153,7 @@ export default function SavingsPage() {
           <select
             value={scopeFilter}
             onChange={(e) => setScopeFilter(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
           >
             <option value="">All scopes</option>
             {scopes.map((s) => (
@@ -185,13 +187,13 @@ export default function SavingsPage() {
               <TBody>
                 {rows.map((r) => (
                   <TR key={r.id}>
-                    <TD className="font-medium text-slate-200">{r.scope}</TD>
-                    <TD className="font-mono text-xs text-slate-400">{r.scope_key}</TD>
-                    <TD className="text-slate-400">{r.period_label ?? '—'}</TD>
+                    <TD className="font-medium text-neutral-200">{r.scope}</TD>
+                    <TD className="font-mono text-xs text-neutral-400">{r.scope_key}</TD>
+                    <TD className="text-neutral-400">{r.period_label ?? '—'}</TD>
                     <TD className="text-right tabular-nums">{r.txn_count.toLocaleString()}</TD>
                     <TD className="text-right font-semibold tabular-nums text-amber-400">{fmtUsd(r.recoverable_cents)}</TD>
                     <TD className="text-right tabular-nums text-rose-400">{fmtUsd(r.annualized_cents)}</TD>
-                    <TD className="max-w-xs text-xs text-slate-400">{r.required_fix ?? '—'}</TD>
+                    <TD className="max-w-xs text-xs text-neutral-400">{r.required_fix ?? '—'}</TD>
                   </TR>
                 ))}
               </TBody>
@@ -199,6 +201,8 @@ export default function SavingsPage() {
           )}
         </CardBody>
       </Card>
+    </div>
+    <RightRail workspaceId={workspaceId} />
     </div>
   )
 }

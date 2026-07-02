@@ -78,7 +78,7 @@ async function resolveWorkspaceId(): Promise<string | null> {
 }
 
 function PalettePip({ idx }: { idx: number }) {
-  const colors = ['bg-emerald-400', 'bg-sky-400', 'bg-amber-400', 'bg-rose-400', 'bg-violet-400', 'bg-teal-400', 'bg-orange-400']
+  const colors = ['bg-red-400', 'bg-neutral-400', 'bg-amber-400', 'bg-rose-400', 'bg-violet-400', 'bg-teal-400', 'bg-orange-400']
   return <span className={`inline-block h-2.5 w-2.5 rounded-sm ${colors[idx % colors.length]}`} />
 }
 
@@ -182,7 +182,7 @@ export default function DowngradesPage() {
     <div className="space-y-8">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-white">Downgrade Detector</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neutral-400">
           Transactions billed at a worse interchange category than they qualified for, attributed to a root cause.
         </p>
       </header>
@@ -215,7 +215,7 @@ export default function DowngradesPage() {
         </CardHeader>
         <CardBody>
           {breakdown.length === 0 ? (
-            <p className="py-6 text-center text-sm text-slate-500">
+            <p className="py-6 text-center text-sm text-neutral-500">
               No downgrade causes yet. Run qualification on a batch to populate the detector.
             </p>
           ) : (
@@ -231,23 +231,23 @@ export default function DowngradesPage() {
                       onClick={() => setCauseFilter(active ? '' : b.cause_code)}
                       className={`w-full rounded-lg border px-3 py-2 text-left transition-colors ${
                         active
-                          ? 'border-emerald-500/50 bg-emerald-500/10'
-                          : 'border-slate-800 bg-slate-900/40 hover:border-slate-700'
+                          ? 'border-red-500/50 bg-red-500/10'
+                          : 'border-neutral-800 bg-neutral-900/40 hover:border-neutral-700'
                       }`}
                     >
                       <div className="flex items-center justify-between gap-3 text-sm">
-                        <span className="flex items-center gap-2 font-medium text-slate-200">
+                        <span className="flex items-center gap-2 font-medium text-neutral-200">
                           <PalettePip idx={i} />
                           {causeLabel(b.cause_code)}
                         </span>
                         <span className="flex items-center gap-3 tabular-nums">
-                          <span className="text-slate-500">{b.count} txns</span>
+                          <span className="text-neutral-500">{b.count} txns</span>
                           <span className="font-semibold text-amber-400">{fmtUsd(b.recoverable_cents)}</span>
                         </span>
                       </div>
-                      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-neutral-800">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-amber-400"
+                          className="h-full rounded-full bg-gradient-to-r from-red-500 to-amber-400"
                           style={{ width: `${Math.max(2, pct)}%` }}
                         />
                       </div>
@@ -271,7 +271,7 @@ export default function DowngradesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search ref, brand, MCC, fix..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 focus:outline-none sm:w-64"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500 focus:outline-none sm:w-64"
             />
           </div>
         </CardHeader>
@@ -309,12 +309,12 @@ export default function DowngradesPage() {
               <TBody>
                 {filteredRows.map((r) => (
                   <TR key={r.id}>
-                    <TD className="font-mono text-xs text-slate-400">
+                    <TD className="font-mono text-xs text-neutral-400">
                       {r.external_ref || r.transaction_id.slice(0, 8)}
                     </TD>
                     <TD>
-                      <span className="text-slate-200">{r.card_brand ?? '—'}</span>
-                      {r.card_product && <span className="text-slate-500"> · {r.card_product}</span>}
+                      <span className="text-neutral-200">{r.card_brand ?? '—'}</span>
+                      {r.card_product && <span className="text-neutral-500"> · {r.card_product}</span>}
                     </TD>
                     <TD className="tabular-nums">{r.mcc ?? '—'}</TD>
                     <TD className="font-mono text-xs">{r.billed_category_code ?? '—'}</TD>
@@ -324,11 +324,11 @@ export default function DowngradesPage() {
                     <TD>
                       <Badge tone={SEVERITY_TONE[r.severity ?? ''] ?? 'neutral'}>{r.severity ?? 'n/a'}</Badge>
                     </TD>
-                    <TD className="text-right tabular-nums text-slate-300">{fmtUsd(r.amount_cents)}</TD>
+                    <TD className="text-right tabular-nums text-neutral-300">{fmtUsd(r.amount_cents)}</TD>
                     <TD className="text-right font-semibold tabular-nums text-amber-400">
                       {fmtUsd(r.recoverable_cents)}
                     </TD>
-                    <TD className="max-w-xs text-xs text-slate-400">{r.required_fix ?? '—'}</TD>
+                    <TD className="max-w-xs text-xs text-neutral-400">{r.required_fix ?? '—'}</TD>
                   </TR>
                 ))}
               </TBody>

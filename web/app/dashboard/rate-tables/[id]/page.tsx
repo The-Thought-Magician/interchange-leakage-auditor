@@ -299,7 +299,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
     ]
     const active = items.filter((i) => i.on)
     if (active.length === 0 && c.max_settlement_hours == null) {
-      return <span className="text-xs text-slate-600">none</span>
+      return <span className="text-xs text-neutral-600">none</span>
     }
     return (
       <div className="flex flex-wrap gap-1">
@@ -324,7 +324,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
   if (error && !version) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/rate-tables" className="text-sm text-emerald-400 hover:underline">
+        <Link href="/dashboard/rate-tables" className="text-sm text-red-400 hover:underline">
           ← Back to rate tables
         </Link>
         <EmptyState
@@ -343,7 +343,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
   if (!version) {
     return (
       <div className="space-y-4">
-        <Link href="/dashboard/rate-tables" className="text-sm text-emerald-400 hover:underline">
+        <Link href="/dashboard/rate-tables" className="text-sm text-red-400 hover:underline">
           ← Back to rate tables
         </Link>
         <EmptyState title="Version not found" description="This rate table version may have been deleted." />
@@ -354,7 +354,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/rate-tables" className="text-sm text-emerald-400 hover:underline">
+        <Link href="/dashboard/rate-tables" className="text-sm text-red-400 hover:underline">
           ← Back to rate tables
         </Link>
       </div>
@@ -365,8 +365,8 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
             <h1 className="text-2xl font-bold text-white">{version.name}</h1>
             {version.is_active ? <Badge tone="success">Active</Badge> : <Badge tone="neutral">Inactive</Badge>}
           </div>
-          <p className="mt-1 text-sm text-slate-500">
-            <span className="font-medium text-slate-400">{version.brand}</span>
+          <p className="mt-1 text-sm text-neutral-500">
+            <span className="font-medium text-neutral-400">{version.brand}</span>
             {version.effective_date && (
               <> · effective {new Date(version.effective_date).toLocaleDateString()}</>
             )}
@@ -410,12 +410,12 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search code, name, MCC…"
-              className="w-64 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="w-64 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
             <select
               value={productFilter}
               onChange={(e) => setProductFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">All products</option>
               <option value="__none__">No product</option>
@@ -437,7 +437,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
               </Button>
             )}
           </div>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-neutral-500">
             {filtered.length} of {categories.length}
           </span>
         </CardHeader>
@@ -476,17 +476,17 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
               <TBody>
                 {filtered.map((c) => (
                   <TR key={c.id}>
-                    <TD className="text-right tabular-nums text-slate-500">{c.tier_rank ?? '—'}</TD>
+                    <TD className="text-right tabular-nums text-neutral-500">{c.tier_rank ?? '—'}</TD>
                     <TD className="font-mono text-xs text-white">{c.code}</TD>
-                    <TD className="text-slate-300">{c.name}</TD>
-                    <TD className="text-slate-400">{c.card_product || '—'}</TD>
-                    <TD className="text-right tabular-nums text-emerald-400">
+                    <TD className="text-neutral-300">{c.name}</TD>
+                    <TD className="text-neutral-400">{c.card_product || '—'}</TD>
+                    <TD className="text-right tabular-nums text-red-400">
                       {c.percent_rate != null ? `${c.percent_rate.toFixed(2)}%` : '—'}
                     </TD>
-                    <TD className="text-right tabular-nums text-slate-400">
+                    <TD className="text-right tabular-nums text-neutral-400">
                       {c.per_item_cents != null ? `${c.per_item_cents}¢` : '—'}
                     </TD>
-                    <TD className="max-w-[10rem] truncate font-mono text-xs text-slate-500">
+                    <TD className="max-w-[10rem] truncate font-mono text-xs text-neutral-500">
                       {c.mcc_set && c.mcc_set.length ? c.mcc_set.join(', ') : 'any'}
                     </TD>
                     <TD>{reqBadges(c)}</TD>
@@ -668,7 +668,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
             </Field>
           </div>
           <div>
-            <span className="mb-2 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <span className="mb-2 block text-xs font-medium uppercase tracking-wide text-neutral-500">
               Requirements
             </span>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -720,7 +720,7 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-neutral-300">
           Delete category{' '}
           <span className="font-mono font-semibold text-white">{deletingCat?.code}</span>? This cannot be undone.
         </p>
@@ -730,12 +730,12 @@ export default function RateTableVersionPage({ params }: { params: Promise<{ id:
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">{label}</span>
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">{label}</span>
       {children}
     </label>
   )
@@ -751,12 +751,12 @@ function Check({
   onChange: (v: boolean) => void
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-300 hover:border-slate-600">
+    <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="h-4 w-4 accent-emerald-500"
+        className="h-4 w-4 accent-red-500"
       />
       {label}
     </label>

@@ -11,6 +11,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Modal } from '@/components/ui/Modal'
 import { Stat } from '@/components/ui/Stat'
 import { Table, THead, TBody, TR, TH, TD } from '@/components/ui/Table'
+import RightRail from '@/components/RightRail'
 
 type Transaction = {
   id: string
@@ -331,11 +332,12 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
+    <div className="min-w-0 flex-1 space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Transactions</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Explore settled transactions, filter by brand, product, MCC and downgrade status, then tag or remove in bulk.
           </p>
         </div>
@@ -354,7 +356,7 @@ export default function TransactionsPage() {
       {/* Filters */}
       <Card>
         <CardHeader className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-sm font-semibold text-slate-200">Filters</span>
+          <span className="text-sm font-semibold text-neutral-200">Filters</span>
           <div className="flex items-center gap-2">
             <Button variant="ghost" onClick={resetFilters}>
               Reset
@@ -369,49 +371,49 @@ export default function TransactionsPage() {
         </CardHeader>
         <CardBody className="space-y-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               Search (ref / category)
               <input
                 value={draft.q}
                 onChange={(e) => setDraft({ ...draft, q: e.target.value })}
                 onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
                 placeholder="external ref or category code"
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               Card brand
               <input
                 value={draft.brand}
                 onChange={(e) => setDraft({ ...draft, brand: e.target.value })}
                 placeholder="Visa, Mastercard…"
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               Card product
               <input
                 value={draft.product}
                 onChange={(e) => setDraft({ ...draft, product: e.target.value })}
                 placeholder="Corporate, Rewards…"
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               MCC
               <input
                 value={draft.mcc}
                 onChange={(e) => setDraft({ ...draft, mcc: e.target.value })}
                 placeholder="5411"
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               Processor
               <select
                 value={draft.processor_id}
                 onChange={(e) => setDraft({ ...draft, processor_id: e.target.value })}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:border-red-500 focus:outline-none"
               >
                 <option value="">All processors</option>
                 {processors.map((p) => (
@@ -421,48 +423,48 @@ export default function TransactionsPage() {
                 ))}
               </select>
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               From
               <input
                 type="date"
                 value={draft.from}
                 onChange={(e) => setDraft({ ...draft, from: e.target.value })}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-slate-400">
+            <label className="flex flex-col gap-1 text-xs text-neutral-400">
               To
               <input
                 type="date"
                 value={draft.to}
                 onChange={(e) => setDraft({ ...draft, to: e.target.value })}
-                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+                className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:border-red-500 focus:outline-none"
               />
             </label>
-            <label className="flex items-center gap-2 self-end pb-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 self-end pb-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={draft.downgrade_only}
                 onChange={(e) => setDraft({ ...draft, downgrade_only: e.target.checked })}
-                className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+                className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-red-500 focus:ring-red-500"
               />
               Downgrades only
             </label>
           </div>
 
           {savedFilters.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 border-t border-slate-800 pt-3">
-              <span className="text-xs uppercase tracking-wide text-slate-500">Saved</span>
+            <div className="flex flex-wrap items-center gap-2 border-t border-neutral-800 pt-3">
+              <span className="text-xs uppercase tracking-wide text-neutral-500">Saved</span>
               {savedFilters.map((sf) => (
-                <span key={sf.id} className="inline-flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-900 pl-2 pr-1 py-1">
-                  <button onClick={() => applySaved(sf)} className="text-xs font-medium text-slate-200 hover:text-emerald-400">
+                <span key={sf.id} className="inline-flex items-center gap-1 rounded-lg border border-neutral-700 bg-neutral-900 pl-2 pr-1 py-1">
+                  <button onClick={() => applySaved(sf)} className="text-xs font-medium text-neutral-200 hover:text-red-400">
                     {sf.name}
                   </button>
                   {sf.is_shared && <Badge tone="info">shared</Badge>}
                   <button
                     onClick={() => deleteSaved(sf.id)}
                     aria-label="Delete saved filter"
-                    className="ml-0.5 px-1 text-slate-600 hover:text-rose-400"
+                    className="ml-0.5 px-1 text-neutral-600 hover:text-rose-400"
                   >
                     ✕
                   </button>
@@ -474,20 +476,20 @@ export default function TransactionsPage() {
       </Card>
 
       {actionMsg && (
-        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">{actionMsg}</div>
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm text-red-300">{actionMsg}</div>
       )}
 
       {/* Bulk action bar */}
       {selected.size > 0 && (
-        <Card className="border-emerald-500/30">
+        <Card className="border-red-500/30">
           <CardBody className="flex flex-wrap items-center gap-3">
-            <span className="text-sm font-medium text-emerald-300">{selected.size} selected</span>
+            <span className="text-sm font-medium text-red-300">{selected.size} selected</span>
             <input
               list="ila-tag-list"
               value={bulkTag}
               onChange={(e) => setBulkTag(e.target.value)}
               placeholder="tag name"
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
             <datalist id="ila-tag-list">
               {tags.map((t) => (
@@ -542,7 +544,7 @@ export default function TransactionsPage() {
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleAll}
-                  className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+                  className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-red-500 focus:ring-red-500"
                   aria-label="Select all"
                 />
               </TH>
@@ -559,37 +561,37 @@ export default function TransactionsPage() {
           </THead>
           <TBody>
             {txns.map((t) => (
-              <TR key={t.id} className={selected.has(t.id) ? 'bg-emerald-500/5' : undefined}>
+              <TR key={t.id} className={selected.has(t.id) ? 'bg-red-500/5' : undefined}>
                 <TD>
                   <input
                     type="checkbox"
                     checked={selected.has(t.id)}
                     onChange={() => toggleRow(t.id)}
-                    className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+                    className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-red-500 focus:ring-red-500"
                     aria-label={`Select ${t.external_ref || t.id}`}
                   />
                 </TD>
                 <TD>
-                  <Link href={`/dashboard/transactions/${t.id}`} className="font-medium text-emerald-400 hover:underline">
+                  <Link href={`/dashboard/transactions/${t.id}`} className="font-medium text-red-400 hover:underline">
                     {t.external_ref || t.id.slice(0, 8)}
                   </Link>
                 </TD>
                 <TD>
                   <div className="flex flex-col gap-1">
                     <Badge tone={brandTone(t.card_brand)}>{t.card_brand || '—'}</Badge>
-                    <span className="text-xs text-slate-500">{t.card_product || '—'}</span>
+                    <span className="text-xs text-neutral-500">{t.card_product || '—'}</span>
                   </div>
                 </TD>
                 <TD className="tabular-nums">{t.mcc || '—'}</TD>
                 <TD className="text-right tabular-nums">{fmtMoney(t.amount_cents)}</TD>
-                <TD className="font-mono text-xs text-slate-400">{t.billed_category_code || '—'}</TD>
+                <TD className="font-mono text-xs text-neutral-400">{t.billed_category_code || '—'}</TD>
                 <TD className="text-right tabular-nums text-amber-400">{fmtMoney(t.billed_fee_cents)}</TD>
                 <TD>
                   <div className="flex flex-wrap gap-1">
                     {t.has_avs && <Badge tone="neutral">AVS</Badge>}
                     {t.has_level2 && <Badge tone="neutral">L2</Badge>}
                     {t.has_level3 && <Badge tone="neutral">L3</Badge>}
-                    {!t.has_avs && !t.has_level2 && !t.has_level3 && <span className="text-xs text-slate-600">—</span>}
+                    {!t.has_avs && !t.has_level2 && !t.has_level3 && <span className="text-xs text-neutral-600">—</span>}
                   </div>
                 </TD>
                 <TD>
@@ -599,10 +601,10 @@ export default function TransactionsPage() {
                         {tag}
                       </Badge>
                     ))}
-                    {(!t.tags || t.tags.length === 0) && <span className="text-xs text-slate-600">—</span>}
+                    {(!t.tags || t.tags.length === 0) && <span className="text-xs text-neutral-600">—</span>}
                   </div>
                 </TD>
-                <TD className="whitespace-nowrap text-xs text-slate-500">{fmtDate(t.auth_timestamp)}</TD>
+                <TD className="whitespace-nowrap text-xs text-neutral-500">{fmtDate(t.auth_timestamp)}</TD>
               </TR>
             ))}
           </TBody>
@@ -626,29 +628,31 @@ export default function TransactionsPage() {
         }
       >
         <div className="space-y-4">
-          <label className="flex flex-col gap-1 text-sm text-slate-300">
+          <label className="flex flex-col gap-1 text-sm text-neutral-300">
             Name
             <input
               value={saveName}
               onChange={(e) => setSaveName(e.target.value)}
               placeholder="e.g. Visa downgrades this month"
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
           </label>
-          <label className="flex items-center gap-2 text-sm text-slate-300">
+          <label className="flex items-center gap-2 text-sm text-neutral-300">
             <input
               type="checkbox"
               checked={saveShared}
               onChange={(e) => setSaveShared(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+              className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-red-500 focus:ring-red-500"
             />
             Share with workspace
           </label>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-neutral-500">
             Stores the current draft filter values (search, brand, product, MCC, processor, dates, downgrade flag).
           </p>
         </div>
       </Modal>
+    </div>
+    <RightRail workspaceId={workspaceId} />
     </div>
   )
 }

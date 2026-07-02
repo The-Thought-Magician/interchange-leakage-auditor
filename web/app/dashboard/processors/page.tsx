@@ -222,7 +222,7 @@ export default function ProcessorsPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Processors</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Payment processors and their pricing terms, used to compute markup over interchange.
           </p>
         </div>
@@ -254,12 +254,12 @@ export default function ProcessorsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search name, MID, notes…"
-              className="w-64 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
+              className="w-64 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none"
             />
             <select
               value={modelFilter}
               onChange={(e) => setModelFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               <option value="">All pricing models</option>
               {PRICING_MODELS.map((m) => (
@@ -280,7 +280,7 @@ export default function ProcessorsPage() {
               </Button>
             )}
           </div>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-neutral-500">
             {filtered.length} of {processors.length}
           </span>
         </CardHeader>
@@ -343,7 +343,7 @@ export default function ProcessorsPage() {
                 {filtered.map((p) => (
                   <TR key={p.id}>
                     <TD className="font-medium text-white">{p.name}</TD>
-                    <TD className="font-mono text-xs text-slate-400">{p.mid || '—'}</TD>
+                    <TD className="font-mono text-xs text-neutral-400">{p.mid || '—'}</TD>
                     <TD>
                       <Badge tone={pricingTone(p.pricing_model)}>{prettyModel(p.pricing_model)}</Badge>
                     </TD>
@@ -353,7 +353,7 @@ export default function ProcessorsPage() {
                     <TD className="text-right tabular-nums">
                       {p.plus_per_item_cents != null ? `${p.plus_per_item_cents}¢` : '—'}
                     </TD>
-                    <TD className="max-w-xs truncate text-slate-500">{p.notes || '—'}</TD>
+                    <TD className="max-w-xs truncate text-neutral-500">{p.notes || '—'}</TD>
                     <TD className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="secondary" onClick={() => openEdit(p)}>
@@ -473,7 +473,7 @@ export default function ProcessorsPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-neutral-300">
           Delete <span className="font-semibold text-white">{deleting?.name}</span>? Statements and
           transactions referencing this processor may be affected. This cannot be undone.
         </p>
@@ -483,12 +483,12 @@ export default function ProcessorsPage() {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none'
+  'w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-red-500 focus:outline-none'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">{label}</span>
+      <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-neutral-500">{label}</span>
       {children}
     </label>
   )

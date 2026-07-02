@@ -82,15 +82,15 @@ function OpportunityBar({
   tone: 'l2' | 'l3'
 }) {
   const pct = max > 0 ? (recoverable / max) * 100 : 0
-  const barColor = tone === 'l2' ? 'from-sky-500 to-sky-400' : 'from-emerald-500 to-emerald-400'
+  const barColor = tone === 'l2' ? 'from-neutral-500 to-neutral-400' : 'from-red-500 to-red-400'
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+    <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-4">
       <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-slate-200">{label}</span>
-        <span className="tabular-nums text-slate-500">{count.toLocaleString()} txns</span>
+        <span className="font-medium text-neutral-200">{label}</span>
+        <span className="tabular-nums text-neutral-500">{count.toLocaleString()} txns</span>
       </div>
       <div className="mt-2 text-xl font-bold tabular-nums text-white">{fmtUsd(recoverable)}</div>
-      <div className="mt-3 h-3 w-full overflow-hidden rounded-full bg-slate-800">
+      <div className="mt-3 h-3 w-full overflow-hidden rounded-full bg-neutral-800">
         <div className={`h-full rounded-full bg-gradient-to-r ${barColor}`} style={{ width: `${Math.max(2, pct)}%` }} />
       </div>
     </div>
@@ -198,7 +198,7 @@ export default function Level23Page() {
     <div className="space-y-8">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-white">Level 2/3 Eligibility Gaps</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neutral-400">
           Commercial-card transactions that would qualify for a lower Level 2 or Level 3 rate if the missing data
           fields were submitted.
         </p>
@@ -255,7 +255,7 @@ export default function Level23Page() {
               />
             </div>
           ) : (
-            <p className="py-6 text-center text-sm text-slate-500">
+            <p className="py-6 text-center text-sm text-neutral-500">
               No Level 2/3 opportunity detected. Seed sample data or run qualification to populate this report.
             </p>
           )}
@@ -267,13 +267,13 @@ export default function Level23Page() {
         <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-base font-semibold text-white">Eligibility gaps</h2>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <div className="flex rounded-lg border border-slate-700 p-0.5">
+            <div className="flex rounded-lg border border-neutral-700 p-0.5">
               {LEVELS.map((l) => (
                 <button
                   key={l.key || 'all'}
                   onClick={() => setLevelFilter(l.key)}
                   className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-                    levelFilter === l.key ? 'bg-emerald-500 text-slate-950' : 'text-slate-400 hover:text-white'
+                    levelFilter === l.key ? 'bg-red-500 text-neutral-950' : 'text-neutral-400 hover:text-white'
                   }`}
                 >
                   {l.label}
@@ -284,7 +284,7 @@ export default function Level23Page() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search ref, brand, MCC..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 focus:outline-none sm:w-56"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500 focus:outline-none sm:w-56"
             />
           </div>
         </CardHeader>
@@ -323,21 +323,21 @@ export default function Level23Page() {
               <TBody>
                 {filteredGaps.map((g) => (
                   <TR key={g.id ?? g.transaction_id}>
-                    <TD className="font-mono text-xs text-slate-400">
+                    <TD className="font-mono text-xs text-neutral-400">
                       {g.external_ref || g.transaction_id.slice(0, 8)}
                     </TD>
                     <TD>
                       <Badge tone={g.level === 'level3' ? 'success' : 'info'}>{levelLabel(g.level)}</Badge>
                     </TD>
                     <TD>
-                      <span className="text-slate-200">{g.card_brand ?? '—'}</span>
-                      {g.card_product && <span className="text-slate-500"> · {g.card_product}</span>}
+                      <span className="text-neutral-200">{g.card_brand ?? '—'}</span>
+                      {g.card_product && <span className="text-neutral-500"> · {g.card_product}</span>}
                     </TD>
                     <TD className="tabular-nums">{g.mcc ?? '—'}</TD>
                     <TD className="font-mono text-xs">
                       <span className="text-rose-400">{g.billed_category_code ?? '—'}</span>
-                      <span className="text-slate-600"> → </span>
-                      <span className="text-emerald-400">{g.optimal_category_code ?? '—'}</span>
+                      <span className="text-neutral-600"> → </span>
+                      <span className="text-red-400">{g.optimal_category_code ?? '—'}</span>
                     </TD>
                     <TD>
                       <Badge tone={g.has_level2 ? 'success' : 'danger'}>{g.has_level2 ? 'yes' : 'no'}</Badge>
@@ -345,11 +345,11 @@ export default function Level23Page() {
                     <TD>
                       <Badge tone={g.has_level3 ? 'success' : 'danger'}>{g.has_level3 ? 'yes' : 'no'}</Badge>
                     </TD>
-                    <TD className="text-right tabular-nums text-slate-300">{fmtUsd(g.amount_cents)}</TD>
+                    <TD className="text-right tabular-nums text-neutral-300">{fmtUsd(g.amount_cents)}</TD>
                     <TD className="text-right font-semibold tabular-nums text-amber-400">
                       {fmtUsd(g.recoverable_cents)}
                     </TD>
-                    <TD className="max-w-xs text-xs text-slate-400">{g.required_fix ?? '—'}</TD>
+                    <TD className="max-w-xs text-xs text-neutral-400">{g.required_fix ?? '—'}</TD>
                   </TR>
                 ))}
               </TBody>

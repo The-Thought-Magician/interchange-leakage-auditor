@@ -9,6 +9,7 @@ import { Spinner } from '@/components/ui/Spinner'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
+import RightRail from '@/components/RightRail'
 
 const WORKSPACE_KEY = 'ila.workspace_id'
 
@@ -176,22 +177,23 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
+    <div className="min-w-0 flex-1 space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Overview</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Interchange leakage, downgrade exposure, and recoverable savings at a glance.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-2">
-            <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Workspace</label>
+            <label className="text-xs font-medium uppercase tracking-wide text-neutral-500">Workspace</label>
             <select
               value={workspaceId}
               onChange={(e) => setWorkspaceId(e.target.value)}
               disabled={workspaces.length === 0}
-              className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
+              className="rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
             >
               {workspaces.length === 0 && <option value="">No workspaces</option>}
               {workspaces.map((w) => (
@@ -216,7 +218,7 @@ export default function DashboardPage() {
         </div>
       )}
       {seedMsg && (
-        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {seedMsg}
         </div>
       )}
@@ -287,13 +289,13 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardBody className="space-y-4">
                     <div>
-                      <div className="mb-1 flex items-center justify-between text-xs text-slate-400">
+                      <div className="mb-1 flex items-center justify-between text-xs text-neutral-400">
                         <span>Recoverable {fmtUsd(recoverable)}</span>
                         <span>Total leakage {fmtUsd(leakage)}</span>
                       </div>
-                      <div className="h-3 w-full overflow-hidden rounded-full bg-slate-800">
+                      <div className="h-3 w-full overflow-hidden rounded-full bg-neutral-800">
                         <div
-                          className="h-full rounded-full bg-emerald-500 transition-all"
+                          className="h-full rounded-full bg-red-500 transition-all"
                           style={{ width: `${recoverPct}%` }}
                         />
                       </div>
@@ -313,17 +315,17 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardBody className="space-y-3 text-sm">
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-slate-500">Name</div>
-                      <div className="text-slate-200">{selectedWorkspace?.name || '—'}</div>
+                      <div className="text-xs uppercase tracking-wide text-neutral-500">Name</div>
+                      <div className="text-neutral-200">{selectedWorkspace?.name || '—'}</div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-slate-500">ID</div>
-                      <div className="break-all font-mono text-xs text-slate-400">{workspaceId || '—'}</div>
+                      <div className="text-xs uppercase tracking-wide text-neutral-500">ID</div>
+                      <div className="break-all font-mono text-xs text-neutral-400">{workspaceId || '—'}</div>
                     </div>
                     <div className="pt-2">
                       <a
                         href="/dashboard/uploads"
-                        className="inline-flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                        className="inline-flex items-center text-sm font-medium text-red-400 hover:text-red-300"
                       >
                         Go to uploads →
                       </a>
@@ -353,18 +355,20 @@ export default function DashboardPage() {
       >
         <form onSubmit={handleCreate} className="space-y-3">
           {createErr && <div className="text-sm text-rose-400">{createErr}</div>}
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             Workspace name
             <input
               autoFocus
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               placeholder="Acme Payments"
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </label>
         </form>
       </Modal>
+    </div>
+    <RightRail workspaceId={workspaceId || null} />
     </div>
   )
 }
@@ -372,8 +376,8 @@ export default function DashboardPage() {
 function MiniStat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 text-lg font-semibold tabular-nums text-slate-100">{value}</div>
+      <div className="text-xs uppercase tracking-wide text-neutral-500">{label}</div>
+      <div className="mt-1 text-lg font-semibold tabular-nums text-neutral-100">{value}</div>
     </div>
   )
 }

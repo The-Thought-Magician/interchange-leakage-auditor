@@ -343,17 +343,17 @@ export default function SettingsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Settings</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Workspace configuration, members, onboarding, and billing.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Workspace</label>
+          <label className="text-xs font-medium uppercase tracking-wide text-neutral-500">Workspace</label>
           <select
             value={workspaceId}
             onChange={(e) => setWorkspaceId(e.target.value)}
             disabled={workspaces.length === 0}
-            className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
+            className="rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
           >
             {workspaces.length === 0 && <option value="">No workspaces</option>}
             {workspaces.map((w) => (
@@ -371,7 +371,7 @@ export default function SettingsPage() {
         </div>
       )}
       {notice && (
-        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {notice}
         </div>
       )}
@@ -403,9 +403,9 @@ export default function SettingsPage() {
               </div>
             </CardHeader>
             <CardBody className="space-y-4">
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-800">
                 <div
-                  className="h-full rounded-full bg-emerald-500 transition-all"
+                  className="h-full rounded-full bg-red-500 transition-all"
                   style={{ width: `${onboardingPct}%` }}
                 />
               </div>
@@ -415,19 +415,19 @@ export default function SettingsPage() {
                   return (
                     <li
                       key={step.key}
-                      className="flex items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-2"
+                      className="flex items-center justify-between gap-3 rounded-lg border border-neutral-800 bg-neutral-950/40 px-3 py-2"
                     >
                       <div className="flex items-center gap-2">
                         <span
                           className={`flex h-5 w-5 items-center justify-center rounded-full border text-xs ${
                             done
-                              ? 'border-emerald-500 bg-emerald-500 text-slate-950'
-                              : 'border-slate-700 text-slate-600'
+                              ? 'border-red-500 bg-red-500 text-neutral-950'
+                              : 'border-neutral-700 text-neutral-600'
                           }`}
                         >
                           {done ? '✓' : ''}
                         </span>
-                        <span className={`text-sm ${done ? 'text-slate-400 line-through' : 'text-slate-200'}`}>
+                        <span className={`text-sm ${done ? 'text-neutral-400 line-through' : 'text-neutral-200'}`}>
                           {step.label}
                         </span>
                       </div>
@@ -457,15 +457,15 @@ export default function SettingsPage() {
             </CardHeader>
             <CardBody className="space-y-4">
               <form onSubmit={handleRenameWorkspace} className="space-y-3">
-                <label className="block text-sm text-slate-300">
+                <label className="block text-sm text-neutral-300">
                   Name
                   <input
                     value={wsName}
                     onChange={(e) => setWsName(e.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </label>
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-neutral-500">
                   ID: <span className="font-mono">{workspaceId}</span>
                 </div>
                 <Button
@@ -475,8 +475,8 @@ export default function SettingsPage() {
                   {savingName ? 'Saving...' : 'Save name'}
                 </Button>
               </form>
-              <div className="border-t border-slate-800 pt-4">
-                <p className="mb-2 text-xs text-slate-500">
+              <div className="border-t border-neutral-800 pt-4">
+                <p className="mb-2 text-xs text-neutral-500">
                   Plant a fully-worked demo workspace with planted downgrades for evaluation.
                 </p>
                 <Button variant="secondary" onClick={handleSeed} disabled={seeding}>
@@ -504,7 +504,7 @@ export default function SettingsPage() {
                   hint="per month"
                 />
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
                 <span>Status:</span>
                 <Badge tone={billing?.subscription?.status === 'active' ? 'success' : 'neutral'}>
                   {billing?.subscription?.status || 'free'}
@@ -563,14 +563,14 @@ export default function SettingsPage() {
                       const isOwner = m.role === 'owner' || m.user_id === selectedWorkspace?.owner_id
                       return (
                         <TR key={m.id}>
-                          <TD className="font-mono text-xs text-slate-300">{m.user_id}</TD>
+                          <TD className="font-mono text-xs text-neutral-300">{m.user_id}</TD>
                           <TD>
                             <Badge tone={isOwner ? 'success' : 'neutral'}>{m.role}</Badge>
                           </TD>
                           <TD>{fmtDate(m.created_at)}</TD>
                           <TD className="text-right">
                             {isOwner ? (
-                              <span className="text-xs text-slate-600">Owner</span>
+                              <span className="text-xs text-neutral-600">Owner</span>
                             ) : (
                               <Button
                                 variant="danger"
@@ -597,22 +597,22 @@ export default function SettingsPage() {
             </CardHeader>
             <CardBody className="space-y-4">
               <form onSubmit={handleSaveSetting} className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_2fr_auto] sm:items-end">
-                <label className="block text-sm text-slate-300">
+                <label className="block text-sm text-neutral-300">
                   Key
                   <input
                     value={settingKey}
                     onChange={(e) => setSettingKey(e.target.value)}
                     placeholder="default_currency"
-                    className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </label>
-                <label className="block text-sm text-slate-300">
+                <label className="block text-sm text-neutral-300">
                   Value (JSON or text)
                   <input
                     value={settingValue}
                     onChange={(e) => setSettingValue(e.target.value)}
                     placeholder='"USD" or {"enabled":true}'
-                    className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </label>
                 <Button type="submit" disabled={savingSetting || !settingKey.trim()}>
@@ -638,9 +638,9 @@ export default function SettingsPage() {
                   <TBody>
                     {settings.map((s) => (
                       <TR key={s.key}>
-                        <TD className="font-mono text-xs text-slate-200">{s.key}</TD>
+                        <TD className="font-mono text-xs text-neutral-200">{s.key}</TD>
                         <TD>
-                          <code className="font-mono text-xs text-slate-400">
+                          <code className="font-mono text-xs text-neutral-400">
                             {typeof s.value === 'string' ? s.value : JSON.stringify(s.value)}
                           </code>
                         </TD>
@@ -682,22 +682,22 @@ export default function SettingsPage() {
       >
         <form onSubmit={handleAddMember} className="space-y-3">
           {memberErr && <div className="text-sm text-rose-400">{memberErr}</div>}
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             User ID
             <input
               autoFocus
               value={memberUserId}
               onChange={(e) => setMemberUserId(e.target.value)}
               placeholder="user_abc123"
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </label>
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             Role
             <select
               value={memberRole}
               onChange={(e) => setMemberRole(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="member">Member</option>
               <option value="admin">Admin</option>
@@ -723,7 +723,7 @@ export default function SettingsPage() {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-neutral-300">
           Remove <span className="font-mono text-white">{removeTarget?.user_id}</span> from this
           workspace? They will lose access immediately.
         </p>

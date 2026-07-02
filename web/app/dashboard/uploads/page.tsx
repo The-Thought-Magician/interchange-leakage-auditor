@@ -246,7 +246,7 @@ export default function UploadsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Uploads</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Import processor statements as CSV or JSON, then parse and run qualification.
           </p>
         </div>
@@ -280,19 +280,19 @@ export default function UploadsPage() {
           <CardHeader>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-sm font-semibold text-white">
-                Batches <span className="text-slate-500">({batches.length})</span>
+                Batches <span className="text-neutral-500">({batches.length})</span>
               </h2>
               <div className="flex flex-wrap items-center gap-2">
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search filename / status"
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
                   <option value="all">All statuses</option>
                   {statuses.map((s) => (
@@ -340,7 +340,7 @@ export default function UploadsPage() {
                       <TD>
                         <Link
                           href={`/dashboard/uploads/${b.id}`}
-                          className="font-medium text-emerald-400 hover:text-emerald-300"
+                          className="font-medium text-red-400 hover:text-red-300"
                         >
                           {b.filename}
                         </Link>
@@ -354,7 +354,7 @@ export default function UploadsPage() {
                       <TD>
                         <Badge tone={statusTone(b.status)}>{b.status || 'unknown'}</Badge>
                       </TD>
-                      <TD className="whitespace-nowrap text-slate-400">{fmtDate(b.created_at)}</TD>
+                      <TD className="whitespace-nowrap text-neutral-400">{fmtDate(b.created_at)}</TD>
                       <TD className="text-right">
                         <div className="flex justify-end gap-2">
                           <Link href={`/dashboard/uploads/${b.id}`}>
@@ -400,19 +400,19 @@ export default function UploadsPage() {
         <form onSubmit={handleCreate} className="space-y-4">
           {createErr && <div className="text-sm text-rose-400">{createErr}</div>}
           {previewCount != null && !createErr && (
-            <div className="text-sm text-emerald-400">{previewCount} row(s) parsed and ready.</div>
+            <div className="text-sm text-red-400">{previewCount} row(s) parsed and ready.</div>
           )}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <label className="block text-sm text-slate-300 sm:col-span-2">
+            <label className="block text-sm text-neutral-300 sm:col-span-2">
               Filename
               <input
                 value={filename}
                 onChange={(e) => setFilename(e.target.value)}
                 placeholder="march-statement.csv"
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </label>
-            <label className="block text-sm text-slate-300">
+            <label className="block text-sm text-neutral-300">
               Format
               <select
                 value={format}
@@ -420,19 +420,19 @@ export default function UploadsPage() {
                   setFormat(e.target.value as 'csv' | 'json')
                   setPreviewCount(null)
                 }}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="csv">CSV</option>
                 <option value="json">JSON</option>
               </select>
             </label>
           </div>
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             Processor (optional)
             <select
               value={processorId}
               onChange={(e) => setProcessorId(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="">Unassigned</option>
               {processors.map((p) => (
@@ -443,7 +443,7 @@ export default function UploadsPage() {
               ))}
             </select>
           </label>
-          <label className="block text-sm text-slate-300">
+          <label className="block text-sm text-neutral-300">
             Paste {format.toUpperCase()} content
             <textarea
               value={raw}
@@ -457,7 +457,7 @@ export default function UploadsPage() {
                   ? 'external_ref,amount_cents,currency,mcc,card_brand,card_product,entry_mode,...\nTXN-1,12500,USD,5411,visa,corporate,keyed,...'
                   : '[{ "external_ref": "TXN-1", "amount_cents": 12500, "card_brand": "visa", "mcc": "5411" }]'
               }
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-1 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-xs text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </label>
         </form>

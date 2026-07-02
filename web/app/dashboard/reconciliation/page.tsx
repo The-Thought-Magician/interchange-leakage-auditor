@@ -124,7 +124,7 @@ export default function ReconciliationPage() {
     <div className="space-y-8">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-white">Reconciliation</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neutral-400">
           Billed-vs-computed interchange totals per uploaded batch, with the discrepancy flagged for review.
         </p>
       </header>
@@ -175,12 +175,12 @@ export default function ReconciliationPage() {
               <TBody>
                 {rows.map((r) => (
                   <TR key={r.id}>
-                    <TD className="font-mono text-xs text-slate-400">{r.batch_id.slice(0, 8)}</TD>
+                    <TD className="font-mono text-xs text-neutral-400">{r.batch_id.slice(0, 8)}</TD>
                     <TD className="text-right tabular-nums">{fmtUsd(r.total_billed_cents)}</TD>
                     <TD className="text-right tabular-nums">{fmtUsd(r.total_computed_cents)}</TD>
                     <TD
                       className={`text-right font-semibold tabular-nums ${
-                        r.discrepancy_cents > 0 ? 'text-rose-400' : r.discrepancy_cents < 0 ? 'text-emerald-400' : 'text-slate-400'
+                        r.discrepancy_cents > 0 ? 'text-rose-400' : r.discrepancy_cents < 0 ? 'text-red-400' : 'text-neutral-400'
                       }`}
                     >
                       {fmtUsd(r.discrepancy_cents)}
@@ -190,7 +190,7 @@ export default function ReconciliationPage() {
                     <TD>
                       <Badge tone={STATUS_TONE[r.status] ?? 'neutral'}>{r.status}</Badge>
                     </TD>
-                    <TD className="max-w-xs truncate text-xs text-slate-500">{r.notes ?? '—'}</TD>
+                    <TD className="max-w-xs truncate text-xs text-neutral-500">{r.notes ?? '—'}</TD>
                   </TR>
                 ))}
               </TBody>

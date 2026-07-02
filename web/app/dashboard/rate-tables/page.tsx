@@ -112,14 +112,14 @@ export default function RateTablesPage() {
       <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Rate Tables</h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-neutral-400">
             Interchange category rate table versions by card brand, used to compute qualification and effective rate.
           </p>
         </div>
         <select
           value={brandFilter}
           onChange={(e) => setBrandFilter(e.target.value)}
-          className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+          className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
         >
           <option value="">All brands</option>
           {brands.map((b) => (
@@ -163,17 +163,17 @@ export default function RateTablesPage() {
               <TBody>
                 {rows.map((r) => (
                   <TR key={r.id}>
-                    <TD className="font-medium text-slate-200">{r.brand}</TD>
+                    <TD className="font-medium text-neutral-200">{r.brand}</TD>
                     <TD>{r.name}</TD>
-                    <TD className="tabular-nums text-slate-400">
+                    <TD className="tabular-nums text-neutral-400">
                       {r.effective_date ? new Date(r.effective_date).toLocaleDateString() : '—'}
                     </TD>
                     <TD>
                       <Badge tone={r.is_active ? 'success' : 'neutral'}>{r.is_active ? 'active' : 'inactive'}</Badge>
                     </TD>
-                    <TD className="max-w-xs truncate text-xs text-slate-500">{r.source_note ?? '—'}</TD>
+                    <TD className="max-w-xs truncate text-xs text-neutral-500">{r.source_note ?? '—'}</TD>
                     <TD className="text-right">
-                      <Link href={`/dashboard/rate-tables/${r.id}`} className="text-sm text-emerald-400 hover:text-emerald-300">
+                      <Link href={`/dashboard/rate-tables/${r.id}`} className="text-sm text-red-400 hover:text-red-300">
                         Open →
                       </Link>
                     </TD>

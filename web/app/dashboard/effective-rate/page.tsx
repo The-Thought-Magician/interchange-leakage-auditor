@@ -118,7 +118,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
 
   if (points.length === 0) {
     return (
-      <p className="py-8 text-center text-sm text-slate-500">No trend data yet. Run qualification to build history.</p>
+      <p className="py-8 text-center text-sm text-neutral-500">No trend data yet. Run qualification to build history.</p>
     )
   }
 
@@ -134,7 +134,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
           return (
             <g key={i}>
               <line x1={padL} y1={gy} x2={W - padR} y2={gy} stroke="#1e293b" strokeWidth={1} />
-              <text x={padL - 6} y={gy + 3} textAnchor="end" className="fill-slate-600" fontSize={10}>
+              <text x={padL - 6} y={gy + 3} textAnchor="end" className="fill-neutral-600" fontSize={10}>
                 {val.toFixed(0)}
               </text>
             </g>
@@ -150,19 +150,19 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
             <circle cx={series.x(i)} cy={series.y(p.optimal_bps ?? 0)} r={2.5} fill="#34d399" />
             <circle cx={series.x(i)} cy={series.y(p.billed_bps ?? 0)} r={2.5} fill="#fb923c" />
             {(points.length <= 8 || i % Math.ceil(points.length / 8) === 0) && (
-              <text x={series.x(i)} y={H - padB + 16} textAnchor="middle" className="fill-slate-600" fontSize={9}>
+              <text x={series.x(i)} y={H - padB + 16} textAnchor="middle" className="fill-neutral-600" fontSize={9}>
                 {(p.period_label || p.period || p.date || `#${i + 1}`).toString().slice(0, 7)}
               </text>
             )}
           </g>
         ))}
       </svg>
-      <div className="mt-2 flex items-center gap-5 px-2 text-xs text-slate-400">
+      <div className="mt-2 flex items-center gap-5 px-2 text-xs text-neutral-400">
         <span className="flex items-center gap-1.5">
           <span className="inline-block h-2 w-3 rounded-sm bg-orange-400" /> Billed
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-2 w-3 rounded-sm bg-emerald-400" /> Optimal
+          <span className="inline-block h-2 w-3 rounded-sm bg-red-400" /> Optimal
         </span>
       </div>
     </div>
@@ -171,30 +171,30 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
 
 /** Horizontal band visualization showing where the billed bps sits within the benchmark band. */
 function BandMeter({ row, bench }: { row: EffectiveRateRow; bench?: Benchmark }) {
-  if (!bench) return <span className="text-xs text-slate-600">No band</span>
+  if (!bench) return <span className="text-xs text-neutral-600">No band</span>
   const billed = row.billed_bps ?? 0
   // Scale across [0, band_high * 1.4] so over-band values still render.
   const scaleMax = Math.max(bench.band_high_bps * 1.4, billed * 1.1, 1)
   const pos = (v: number) => `${Math.min(100, Math.max(0, (v / scaleMax) * 100))}%`
   const status = bandStatus(billed, bench)
   const markerColor =
-    status.tone === 'danger' ? 'bg-rose-400' : status.tone === 'warning' ? 'bg-amber-400' : 'bg-emerald-400'
+    status.tone === 'danger' ? 'bg-rose-400' : status.tone === 'warning' ? 'bg-amber-400' : 'bg-red-400'
   return (
     <div className="w-44">
-      <div className="relative h-3 w-full overflow-hidden rounded-full bg-slate-800">
+      <div className="relative h-3 w-full overflow-hidden rounded-full bg-neutral-800">
         {/* target band region */}
         <div
-          className="absolute inset-y-0 bg-emerald-500/25"
+          className="absolute inset-y-0 bg-red-500/25"
           style={{ left: pos(bench.band_low_bps), right: `calc(100% - ${pos(bench.band_high_bps)})` }}
         />
         {/* target line */}
-        <div className="absolute inset-y-0 w-px bg-emerald-400/70" style={{ left: pos(bench.band_target_bps) }} />
+        <div className="absolute inset-y-0 w-px bg-red-400/70" style={{ left: pos(bench.band_target_bps) }} />
         {/* billed marker */}
-        <div className={`absolute top-1/2 h-3 w-1 -translate-y-1/2 rounded ${markerColor}`} style={{ left: pos(billed) }} />
+        <div className={`absolute top-1/2 h-3 w-1 -tranneutral-y-1/2 rounded ${markerColor}`} style={{ left: pos(billed) }} />
       </div>
-      <div className="mt-1 flex justify-between text-[10px] tabular-nums text-slate-600">
+      <div className="mt-1 flex justify-between text-[10px] tabular-nums text-neutral-600">
         <span>{bench.band_low_bps.toFixed(0)}</span>
-        <span className="text-emerald-500">{bench.band_target_bps.toFixed(0)}</span>
+        <span className="text-red-500">{bench.band_target_bps.toFixed(0)}</span>
         <span>{bench.band_high_bps.toFixed(0)}</span>
       </div>
     </div>
@@ -332,7 +332,7 @@ export default function EffectiveRatePage() {
     <div className="space-y-8">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-white">Effective Rate</h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neutral-400">
           Blended effective interchange rate (basis points of volume) compared to the optimal achievable rate and your
           benchmark bands.
         </p>
@@ -374,7 +374,7 @@ export default function EffectiveRatePage() {
             <select
               value={dimension}
               onChange={(e) => setDimension(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
             >
               {DIMENSIONS.map((d) => (
                 <option key={d.key} value={d.key}>
@@ -386,7 +386,7 @@ export default function EffectiveRatePage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search key..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-emerald-500 focus:outline-none sm:w-48"
+              className="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 focus:border-red-500 focus:outline-none sm:w-48"
             />
           </div>
         </CardHeader>
@@ -427,11 +427,11 @@ export default function EffectiveRatePage() {
                   const delta = r.delta_bps ?? (r.billed_bps ?? 0) - (r.optimal_bps ?? 0)
                   return (
                     <TR key={`${r.dimension ?? dimension}-${r.dimension_key}`}>
-                      <TD className="font-medium text-slate-200">{r.dimension_key || 'Overall'}</TD>
+                      <TD className="font-medium text-neutral-200">{r.dimension_key || 'Overall'}</TD>
                       <TD className="text-right tabular-nums">{(r.txn_count ?? 0).toLocaleString()}</TD>
                       <TD className="text-right tabular-nums text-orange-300">{fmtBps(r.billed_bps)}</TD>
-                      <TD className="text-right tabular-nums text-emerald-300">{fmtBps(r.optimal_bps)}</TD>
-                      <TD className={`text-right tabular-nums ${delta > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                      <TD className="text-right tabular-nums text-red-300">{fmtBps(r.optimal_bps)}</TD>
+                      <TD className={`text-right tabular-nums ${delta > 0 ? 'text-rose-400' : 'text-red-400'}`}>
                         {delta > 0 ? '+' : ''}
                         {fmtBps(delta)}
                       </TD>
@@ -451,9 +451,9 @@ export default function EffectiveRatePage() {
         </CardBody>
       </Card>
 
-      <p className="text-xs text-slate-600">
+      <p className="text-xs text-neutral-600">
         Manage benchmark bands under{' '}
-        <a href="/dashboard/benchmarks" className="text-emerald-400 hover:underline">
+        <a href="/dashboard/benchmarks" className="text-red-400 hover:underline">
           Reference Data → Benchmarks
         </a>
         .

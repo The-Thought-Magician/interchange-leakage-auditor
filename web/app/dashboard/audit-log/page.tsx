@@ -156,17 +156,17 @@ export default function AuditLogPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Audit Log</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Immutable record of every write action across the workspace.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Workspace</label>
+          <label className="text-xs font-medium uppercase tracking-wide text-neutral-500">Workspace</label>
           <select
             value={workspaceId}
             onChange={(e) => setWorkspaceId(e.target.value)}
             disabled={workspaces.length === 0}
-            className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
+            className="rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
           >
             {workspaces.length === 0 && <option value="">No workspaces</option>}
             {workspaces.map((w) => (
@@ -205,7 +205,7 @@ export default function AuditLogPage() {
                   <select
                     value={actionFilter}
                     onChange={(e) => setActionFilter(e.target.value)}
-                    className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="">All actions</option>
                     {actionOptions.map((a) => (
@@ -217,7 +217,7 @@ export default function AuditLogPage() {
                   <select
                     value={entityFilter}
                     onChange={(e) => setEntityFilter(e.target.value)}
-                    className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="">All entities</option>
                     {entityOptions.map((t) => (
@@ -230,7 +230,7 @@ export default function AuditLogPage() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search..."
-                    className="w-48 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-48 rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                   {(actionFilter || entityFilter || search) && (
                     <Button variant="ghost" onClick={clearFilters}>
@@ -278,18 +278,18 @@ export default function AuditLogPage() {
                   <TBody>
                     {filtered.map((e) => (
                       <TR key={e.id}>
-                        <TD className="whitespace-nowrap text-xs text-slate-400">{fmtDate(e.created_at)}</TD>
+                        <TD className="whitespace-nowrap text-xs text-neutral-400">{fmtDate(e.created_at)}</TD>
                         <TD>
                           <Badge tone={actionTone(e.action)}>{e.action}</Badge>
                         </TD>
-                        <TD className="text-slate-300">{e.entity_type || '—'}</TD>
+                        <TD className="text-neutral-300">{e.entity_type || '—'}</TD>
                         <TD>
-                          <span className="font-mono text-xs text-slate-500">
+                          <span className="font-mono text-xs text-neutral-500">
                             {e.entity_id ? `${e.entity_id.slice(0, 12)}…` : '—'}
                           </span>
                         </TD>
                         <TD>
-                          <span className="font-mono text-xs text-slate-400">
+                          <span className="font-mono text-xs text-neutral-400">
                             {e.user_id ? `${e.user_id.slice(0, 10)}…` : 'system'}
                           </span>
                         </TD>
@@ -303,7 +303,7 @@ export default function AuditLogPage() {
                               View
                             </Button>
                           ) : (
-                            <span className="text-xs text-slate-600">—</span>
+                            <span className="text-xs text-neutral-600">—</span>
                           )}
                         </TD>
                       </TR>
@@ -330,8 +330,8 @@ export default function AuditLogPage() {
             <Field label="Actor" value={detail.user_id || 'system'} mono />
             <Field label="Time" value={fmtDate(detail.created_at)} />
             <div>
-              <div className="text-xs uppercase tracking-wide text-slate-500">Metadata</div>
-              <pre className="mt-1 max-h-64 overflow-auto rounded-lg border border-slate-800 bg-slate-950 p-3 font-mono text-xs text-slate-300">
+              <div className="text-xs uppercase tracking-wide text-neutral-500">Metadata</div>
+              <pre className="mt-1 max-h-64 overflow-auto rounded-lg border border-neutral-800 bg-neutral-950 p-3 font-mono text-xs text-neutral-300">
                 {JSON.stringify(detail.metadata ?? {}, null, 2)}
               </pre>
             </div>
@@ -345,8 +345,8 @@ export default function AuditLogPage() {
 function Field({ label, value, mono }: { label: string; value: React.ReactNode; mono?: boolean }) {
   return (
     <div>
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className={`mt-0.5 break-all text-slate-200 ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
+      <div className="text-xs uppercase tracking-wide text-neutral-500">{label}</div>
+      <div className={`mt-0.5 break-all text-neutral-200 ${mono ? 'font-mono text-xs' : ''}`}>{value}</div>
     </div>
   )
 }

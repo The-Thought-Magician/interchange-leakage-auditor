@@ -226,7 +226,7 @@ export default function QualificationPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white">Qualification</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neutral-400">
             Run the deterministic interchange engine over upload batches and review per-transaction optimal vs billed results.
           </p>
         </div>
@@ -246,12 +246,12 @@ export default function QualificationPage() {
         <Stat label="Leakage" value={fmtMoney(summary.leakage)} tone="danger" />
       </div>
 
-      {msg && <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">{msg}</div>}
+      {msg && <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm text-red-300">{msg}</div>}
 
       {/* Run engine per batch */}
       <Card>
         <CardHeader>
-          <span className="text-sm font-semibold text-slate-200">Run engine per batch</span>
+          <span className="text-sm font-semibold text-neutral-200">Run engine per batch</span>
         </CardHeader>
         <CardBody>
           {batches.length === 0 ? (
@@ -280,16 +280,16 @@ export default function QualificationPage() {
                 {batches.map((b) => (
                   <TR key={b.id}>
                     <TD>
-                      <Link href={`/dashboard/uploads/${b.id}`} className="font-medium text-emerald-400 hover:underline">
+                      <Link href={`/dashboard/uploads/${b.id}`} className="font-medium text-red-400 hover:underline">
                         {b.filename || b.id.slice(0, 8)}
                       </Link>
                     </TD>
-                    <TD className="text-xs uppercase text-slate-500">{b.source_format || '—'}</TD>
+                    <TD className="text-xs uppercase text-neutral-500">{b.source_format || '—'}</TD>
                     <TD className="text-right tabular-nums">{b.row_count ?? '—'}</TD>
                     <TD>
                       <Badge tone={statusTone(b.status)}>{b.status || 'unknown'}</Badge>
                     </TD>
-                    <TD className="whitespace-nowrap text-xs text-slate-500">{fmtDate(b.created_at)}</TD>
+                    <TD className="whitespace-nowrap text-xs text-neutral-500">{fmtDate(b.created_at)}</TD>
                     <TD className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="ghost" onClick={() => setBatchFilter(b.id)}>
@@ -311,12 +311,12 @@ export default function QualificationPage() {
       {/* Results list */}
       <Card>
         <CardHeader className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-sm font-semibold text-slate-200">Qualification results</span>
+          <span className="text-sm font-semibold text-neutral-200">Qualification results</span>
           <div className="flex flex-wrap items-center gap-3">
             <select
               value={batchFilter}
               onChange={(e) => setBatchFilter(e.target.value)}
-              className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
+              className="rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-1.5 text-sm text-neutral-100 focus:border-red-500 focus:outline-none"
             >
               <option value="">All batches</option>
               {batches.map((b) => (
@@ -325,12 +325,12 @@ export default function QualificationPage() {
                 </option>
               ))}
             </select>
-            <label className="flex items-center gap-2 text-sm text-slate-300">
+            <label className="flex items-center gap-2 text-sm text-neutral-300">
               <input
                 type="checkbox"
                 checked={downgradeOnly}
                 onChange={(e) => setDowngradeOnly(e.target.checked)}
-                className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+                className="h-4 w-4 rounded border-neutral-600 bg-neutral-950 text-red-500 focus:ring-red-500"
               />
               Downgrades only
             </label>
@@ -372,20 +372,20 @@ export default function QualificationPage() {
                     <TD>
                       <Link
                         href={`/dashboard/transactions/${r.transaction_id}`}
-                        className="font-mono text-xs text-emerald-400 hover:underline"
+                        className="font-mono text-xs text-red-400 hover:underline"
                       >
                         {r.transaction_id.slice(0, 10)}
                       </Link>
                     </TD>
-                    <TD className="font-mono text-xs text-slate-400">{r.optimal_category_code || '—'}</TD>
+                    <TD className="font-mono text-xs text-neutral-400">{r.optimal_category_code || '—'}</TD>
                     <TD className="text-right tabular-nums text-amber-400">{fmtMoney(r.billed_fee_cents)}</TD>
-                    <TD className="text-right tabular-nums text-emerald-400">{fmtMoney(r.optimal_fee_cents)}</TD>
-                    <TD className={`text-right tabular-nums ${(r.delta_cents || 0) > 0 ? 'text-rose-400' : 'text-slate-400'}`}>
+                    <TD className="text-right tabular-nums text-red-400">{fmtMoney(r.optimal_fee_cents)}</TD>
+                    <TD className={`text-right tabular-nums ${(r.delta_cents || 0) > 0 ? 'text-rose-400' : 'text-neutral-400'}`}>
                       {fmtMoney(r.delta_cents)}
                     </TD>
-                    <TD className="text-right tabular-nums text-slate-400">{fmtBps(r.delta_bps)}</TD>
+                    <TD className="text-right tabular-nums text-neutral-400">{fmtBps(r.delta_bps)}</TD>
                     <TD>{r.is_downgrade ? <Badge tone="danger">downgrade</Badge> : <Badge tone="success">optimal</Badge>}</TD>
-                    <TD className="whitespace-nowrap text-xs text-slate-500">{fmtDate(r.computed_at)}</TD>
+                    <TD className="whitespace-nowrap text-xs text-neutral-500">{fmtDate(r.computed_at)}</TD>
                   </TR>
                 ))}
               </TBody>

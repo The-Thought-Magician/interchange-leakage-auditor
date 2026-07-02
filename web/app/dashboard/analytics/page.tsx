@@ -70,9 +70,9 @@ function causeLabel(code?: string) {
 
 function HBar({ value, max, tone = 'emerald' }: { value: number; max: number; tone?: string }) {
   const pct = max > 0 ? Math.max(2, Math.round((value / max) * 100)) : 0
-  const color = tone === 'rose' ? 'bg-rose-500' : tone === 'amber' ? 'bg-amber-500' : 'bg-emerald-500'
+  const color = tone === 'rose' ? 'bg-rose-500' : tone === 'amber' ? 'bg-amber-500' : 'bg-red-500'
   return (
-    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+    <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-800">
       <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
     </div>
   )
@@ -177,13 +177,13 @@ export default function AnalyticsPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold text-white">Analytics</h1>
-          <p className="text-sm text-slate-500">Aggregate interchange leakage across the workspace.</p>
+          <p className="text-sm text-neutral-500">Aggregate interchange leakage across the workspace.</p>
         </div>
         <div className="flex items-center gap-2">
           <select
             value={wsId}
             onChange={(e) => setWsId(e.target.value)}
-            className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 focus:border-red-500 focus:outline-none"
           >
             {workspaces.map((w) => (
               <option key={w.id} value={w.id}>{w.name}</option>
@@ -247,17 +247,17 @@ export default function AnalyticsPage() {
                 </CardHeader>
                 <CardBody>
                   {causeRows.length === 0 ? (
-                    <p className="py-6 text-center text-sm text-slate-500">No downgrade causes detected.</p>
+                    <p className="py-6 text-center text-sm text-neutral-500">No downgrade causes detected.</p>
                   ) : (
                     <div className="space-y-4">
                       {causeRows.map((c) => (
                         <div key={c.code}>
                           <div className="mb-1.5 flex items-center justify-between text-sm">
-                            <span className="font-medium text-slate-200">{causeLabel(c.code)}</span>
+                            <span className="font-medium text-neutral-200">{causeLabel(c.code)}</span>
                             <span className="tabular-nums text-rose-400">{fmtMoneyCents(c.dollars)}</span>
                           </div>
                           <HBar value={c.dollars} max={maxCause} tone="rose" />
-                          <div className="mt-1 text-xs text-slate-500">{fmtNum(c.count)} transactions</div>
+                          <div className="mt-1 text-xs text-neutral-500">{fmtNum(c.count)} transactions</div>
                         </div>
                       ))}
                     </div>
@@ -272,17 +272,17 @@ export default function AnalyticsPage() {
                 </CardHeader>
                 <CardBody>
                   {mccRows.length === 0 ? (
-                    <p className="py-6 text-center text-sm text-slate-500">No MCC leakage detected.</p>
+                    <p className="py-6 text-center text-sm text-neutral-500">No MCC leakage detected.</p>
                   ) : (
                     <div className="space-y-4">
                       {mccRows.map((m) => (
                         <div key={m.mcc}>
                           <div className="mb-1.5 flex items-center justify-between text-sm">
-                            <span className="font-mono font-medium text-slate-200">MCC {m.mcc}</span>
+                            <span className="font-mono font-medium text-neutral-200">MCC {m.mcc}</span>
                             <span className="tabular-nums text-amber-400">{fmtMoneyCents(m.leak)}</span>
                           </div>
                           <HBar value={m.leak} max={maxMcc} tone="amber" />
-                          <div className="mt-1 text-xs text-slate-500">{fmtNum(m.count)} transactions</div>
+                          <div className="mt-1 text-xs text-neutral-500">{fmtNum(m.count)} transactions</div>
                         </div>
                       ))}
                     </div>
@@ -309,10 +309,10 @@ export default function AnalyticsPage() {
                         const share = maxCause > 0 ? Math.round((c.dollars / causeRows.reduce((s, r) => s + r.dollars, 0)) * 100) : 0
                         return (
                           <TR key={c.code}>
-                            <TD><span className="font-medium text-slate-200">{causeLabel(c.code)}</span></TD>
+                            <TD><span className="font-medium text-neutral-200">{causeLabel(c.code)}</span></TD>
                             <TD className="text-right tabular-nums">{fmtNum(c.count)}</TD>
                             <TD className="text-right tabular-nums text-rose-400">{fmtMoneyCents(c.dollars)}</TD>
-                            <TD className="text-right tabular-nums text-slate-400">{share}%</TD>
+                            <TD className="text-right tabular-nums text-neutral-400">{share}%</TD>
                           </TR>
                         )
                       })}
